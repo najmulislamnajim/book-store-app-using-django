@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block content%}
+
+
+<div class="container">
+
+    <div class="col-md-12" style="margin-top:1.5rem;">                                   
+        <a href="{% url 'form'%}" class="btn btn-success btn-send">Add New Book</a>
+    </div>
+
+    <div class="w-50 p-20" style="margin-top:1.5rem; margin-left:35%; margin-right:auto">
+        <h1>Book Lists</h1>
+    </div>
+
+    {% if books %}
+    <table class="table table-hover table-secondary table-borderless" style="margin-top:1.5rem">
+        
+        <thead >
+            <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Book Name</th>
+            <th scope="col">Author</th>
+            <th scope="col">Category</th>
+            <th scope="col">First Publication</th>
+            <th scope="col">Last Publication</th>
+            <th scope="col">Action</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for book in books%} 
+            <tr>
+                <td>{{book.id}}</td>
+                <td>{{book.bookName}}</td>
+                <td>{{book.author}}</td>
+                <td>{{book.category}}</td>
+                <td>{{book.first_pub}}</td>
+                <td>{{book.last_pub}}</td>
+                <td><a href="{% url 'edit' id=book.id %}" class="btn btn-warning btn-sm">edit</a> <a href="{% url 'delete' id=book.id %}" class="btn btn-danger btn-sm">delete</a></td>
+            </tr>
+            {% endfor %}
+               
+        </tbody>
+        
+    </table>
+    {% else%}
+    <h3 class="w-50 p-20" style="margin-top:1.5rem; margin-left:35%; margin-right:auto">No Books Available</h3>
+    {% endif %}
+</div>
+{% endblock %}
